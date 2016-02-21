@@ -1,0 +1,4 @@
+#skip pyc document
+.pyc
+#skip db.sqlite3
+db.sqlite3
