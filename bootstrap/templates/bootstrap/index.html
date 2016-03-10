@@ -1,40 +1,16 @@
-{% load staticfiles %}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+            />
+                <title></title>
+            </head>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Bootstrap 实例</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />   
-</head>
-<body>
-
-<div class="container">
-  <div class="jumbotron">
-    <h1>我的第一个 Bootstrap 页面</h1>
-    <p>重置窗口大小，查看响应式效果！</p> 
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>第一列</h3>
-      <p>学的不仅是技术，更是梦想！</p>
-      <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>第二列{{ datetime }}</h3>
-      <p>学的不仅是技术，更是梦想！</p>
-      <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>第三列</h3>        
-      <p>学的不仅是技术，更是梦想！</p>
-      <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
-    </div>
-  </div>
-</div>
-<script src="{% static 'jquery/jquery.js' %}" />
-<script src="{% static 'bootstrap/js/bootstrap.js' %}" />
-</body>
-</html>
+            <body>
+                <h1>welcome {{username}} !</h1>
+                <br>
+                <a href="{%url 'bootstrap:logout'%}">退出</a>
+            </body>
+        </html>

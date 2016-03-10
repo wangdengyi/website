@@ -1,0 +1,48 @@
+from django.shortcuts import render_to_response  
+#中文测试
+from django.template import RequestContext  
+from django.http import HttpResponseRedirect,HttpResponse 
+from django.core.urlresolvers import reverse  
+
+import pyexcel.ext.xls
+import django_excel
+import pyexcel.ext.xlsx
+import pyexcel
+from .models import Document  
+from .model.t_Ticket import T_ticket
+from .forms.addFile import DocumentForm  
+from .forms.addName import NameForm
+from .forms.regUser import RegUser
+from .models import User
+from .forms.addFile import ExcelForm 
+from .model.t_Question import Question
+from .model.t_Question import Choice
+
+def importdb(request):
+    if request.method == "POST":
+        form = ExcelForm(request.POST,
+                              request.FILES)
+        def choice_func(row):
+            q = Question.objects.filter(slug=row[0])[0]
+            row[0] = q
+            return row
+        if form.is_valid():
+            request.FILES['excelfile'].save_book_to_database(
+                models=[Question, Choice],
+                initializers=[None, choice_func],
+                mapdicts=[
+                    ['question_text', 'pub_date', 'slug'],
+                    ['question', 'choice_text', 'votes']]
+            )
+            return HttpResponse("OK", status=200)
+        else:
+            return HttpResponseBadRequest()
+    else:
+        form = ExcelForm()
+    return render_to_response(
+        'bootstrap/upload_db.html',
+        {
+            'form': form,
+            'title': 'Import excel data into database example',
+            'header': 'Please upload sample-data.xls:'
+        },context_instance=RequestContext(request))

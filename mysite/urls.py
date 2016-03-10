@@ -13,11 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url,include,patterns
 from django.contrib import admin
+from django.views.generic import RedirectView 
+from django.conf.urls.static import static  
+from django.conf import settings 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^polls/',include('polls.urls')),
     url(r'^bootstrap/',include('bootstrap.urls')),
-]
+    url(r'^$', RedirectView.as_view(url='/bootstrap/list/')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)       
+
+
+'''
+urlpatterns = patterns('',  
+    (r'^bootstrap/', include('bootstrap.urls')),  
+    (r'^$', RedirectView.as_view(url='/mysite/bootstrap/list/')), # Just for ease of use.  
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+'''

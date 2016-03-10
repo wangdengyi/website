@@ -1,0 +1,19 @@
+<html>
+<head>
+</head>
+<body>
+{% load bootstrap3 %}
+<form action="/your-name/" method="post">
+
+    {% csrf_token %}
+    {% bootstrap_form form %} 
+    {% buttons %}
+        <button tpye="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+    {% endbuttons %}    
+
+    
+</form>
+</body>
+</html>
